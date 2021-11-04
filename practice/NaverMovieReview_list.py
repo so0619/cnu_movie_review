@@ -17,7 +17,7 @@ for i, one in enumerate(review_list):
     score = one.select('div.star_score > em')[0].get_text()
 
     # 리뷰 정보 수집
-    review = one.select('div.score_reple > p > span')
+    review = one.select('div.score_reple > p > span')[-1].get_text().strip()
 
     # review => +관람객 list 길이 2            => index [1]
     #           +관람객이 없는 경우 list 길이 1  => index [0]
@@ -27,10 +27,12 @@ for i, one in enumerate(review_list):
     # elif len(review) ==1:
     #     review_txt = review[0].get_text().strip()
 
-    j = 0
-    if len(review) == 2:  # +관람객
-        j = 1
-    review_text = review[j].get_text().strip()
+    # j = 0
+    # if len(review) == 2:  # +관람객
+    #     j = 1
+    # elif len(review) ==3:
+    #     j = 2
+
 
     # 작성자(닉네임) 정보 수집
     original_writer = one.select('div.score_reple dt em')[0].get_text().strip()
@@ -44,7 +46,7 @@ for i, one in enumerate(review_list):
     # yyyy.mm.dd 전처리 코드 작성
     date = original_date[:10]
 
-    print(':: REVIEW -> {}'.format(review_text))
+    print(':: REVIEW -> {}'.format(review))
     print(':: WRITER -> {}'.format(writer))
     print(':: SCORE -> {}'.format(score))
     print(':: DATE -> {}'.format(date))
